@@ -1,0 +1,9 @@
+@if (!(user$ | async)) {
+  <input type="email" [(ngModel)]="email" placeholder="E-mailadres" />
+
+  <button (click)="login()">Verstuur loginlink</button>
+} @else {
+  <button (click)="logout()">Uitloggen</button>
+}
+
+<p>Gebruiker: {{ (user$ | async)?.email }}</p>
