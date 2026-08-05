@@ -1,1 +1,12 @@
 <app-login></app-login>
+
+UL staat hier 
+<ul id="event-list">
+  @for (event of events; track event.id) {
+    <li>
+      <h1>{{ event.date }}</h1>
+      <h3>{{ event.Title }}</h3>
+      <span>{{ event.description }}</span>
+    </li>
+  }
+</ul>
