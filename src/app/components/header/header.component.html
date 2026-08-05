@@ -1,0 +1,13 @@
+<header class="header">
+  <div class="logo">
+    <a routerLink="/">Mijn Portfolio</a>
+  </div>
+
+  <nav class="nav-tabs" aria-label="Hoofdnavigatie">
+    @for (tab of tabs; track tab.path) {
+      <a [routerLink]="tab.path" routerLinkActive="active" class="tab-button">
+        {{ tab.label }}
+      </a>
+    }
+  </nav>
+</header>
