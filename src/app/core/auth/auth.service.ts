@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import {
   User,
   onAuthStateChanged,
@@ -7,19 +7,19 @@ import {
   isSignInWithEmailLink,
   signInWithEmailLink,
 } from 'firebase/auth';
-import { BehaviorSubject } from 'rxjs';
 import { auth } from '../firebase/firebase';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private userSubject = new BehaviorSubject<User | null>(null);
-  user$ = this.userSubject.asObservable();
+  private userSignal = signal<User | null>(null);
+
+  user = this.userSignal.asReadonly();
 
   constructor() {
     onAuthStateChanged(auth, (user) => {
-      this.userSubject.next(user);
+      this.userSignal.set(user);
     });
 
     this.completeSignInWithEmailLink();
@@ -27,9 +27,11 @@ export class AuthService {
 
   sendLoginLink(email: string) {
     const actionCodeSettings = {
-      url: window.location.origin,
+      url: `${window.location.origin}/login-success`,
       handleCodeInApp: true,
     };
+
+    window.localStorage.setItem('emailForSignIn', email);
 
     return sendSignInLinkToEmail(auth, email, actionCodeSettings);
   }
@@ -38,7 +40,6 @@ export class AuthService {
     if (isSignInWithEmailLink(auth, window.location.href)) {
       let email = window.localStorage.getItem('emailForSignIn');
 
-      // Als het e-mailadres niet in localStorage staat (bijv. op een ander apparaat geopend), vraag er dan om
       if (!email) {
         email = window.prompt('Voer je e-mailadres in ter bevestiging:');
       }
@@ -46,6 +47,7 @@ export class AuthService {
       if (email) {
         try {
           await signInWithEmailLink(auth, email, window.location.href);
+
           window.localStorage.removeItem('emailForSignIn');
         } catch (error) {
           console.error('Fout bij het inloggen met link:', error);

@@ -1,4 +1,4 @@
-@if (!(user$ | async)) {
+@if (!user()) {
   <input type="email" [(ngModel)]="email" placeholder="E-mailadres" />
 
   <button (click)="login()">Verstuur loginlink</button>
@@ -6,8 +6,8 @@
   <button (click)="logout()">Uitloggen</button>
 }
 
-<p>Gebruiker: {{ (user$ | async)?.email }}</p>
+<p>Gebruiker: {{ user()?.email }}</p>
 
-@if (error !== '') {
-  <p class="error">{{ error }}</p>
+@if (error() !== '') {
+  <p class="error">{{ error() }}</p>
 }

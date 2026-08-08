@@ -1,8 +1,8 @@
 <app-login></app-login>
 
-UL staat hier 
+<p>Aantal events: {{ events().length }}</p>
 <ul id="event-list">
-  @for (event of events; track event.id) {
+  @for (event of events(); track event.id) {
     <li>
       <h1>{{ event.date }}</h1>
       <h3>{{ event.Title }}</h3>
