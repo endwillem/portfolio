@@ -1,12 +1,14 @@
 <header class="header">
   <div class="logo">
-    <a routerLink="/">Mijn Portfolio</a>
+    <a routerLink="/">
+      <img src="/images/logo_transparent.png" alt="logo_transparent" />
+    </a>
   </div>
 
-  <nav class="nav-tabs" aria-label="Hoofdnavigatie">
-    @for (tab of tabs; track tab.path) {
-      <a [routerLink]="tab.path" routerLinkActive="active" class="tab-button">
-        {{ tab.label }}
+  <nav class="navigation-buttons">
+    @for (button of buttons; track button.path) {
+      <a [routerLink]="button.path" routerLinkActive="active" class="navigation-button">
+        {{ button.label }}
       </a>
     }
   </nav>

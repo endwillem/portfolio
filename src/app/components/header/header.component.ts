@@ -10,7 +10,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class HeaderComponent {
   // Optioneel: pas de naam/tabs aan naar wens
-  tabs = [
+  buttons = [
     { label: 'home', path: '/home' },
     { label: 'contact', path: '/contact' },
   ];
