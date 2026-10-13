@@ -17,4 +17,13 @@ Text secondary
 body {
   background: #100d16;
   color: #f1f5f9;
+  font-family: 'Inter', sans-serif;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/assets/fonts/Inter/Inter.ttf') format('truetype-variations'); /* of format('truetype') */
+  font-weight: 100 900; /* Dit betekent: alle gewichten van 100 tot en met 900 zijn beschikbaar! */
+  font-style: normal;
+  font-display: swap;
 }
